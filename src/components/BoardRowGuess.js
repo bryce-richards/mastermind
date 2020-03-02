@@ -8,11 +8,13 @@ export default class BoardRowGuess extends Component {
     this.state = {};
   }
 
-  buildRows(codePegs) {
+  buildRows() {
+    const { codePegs } = this.props;
+
     return codePegs.map((peg, i) => {
       return (
         <div key={i+1} className="mx-2">
-          <Peg color={peg} />
+          <Peg color={peg} type="guess"/>
         </div>
       )
     })
@@ -21,7 +23,7 @@ export default class BoardRowGuess extends Component {
   render() {
     return (
       <div className="row mx-auto">
-        {this.buildRows(this.props.codePegs)}
+        {this.buildRows()}
       </div>
     );
   }

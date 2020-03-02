@@ -15,7 +15,8 @@ export default class App extends Component {
       codeLen: 4,
       numColors: 6,
       style: "neon",
-      paletteColor: 0
+      paletteColor: 0,
+      guess: 0
     };
 
     this.handleNewGame = this.handleNewGame.bind(this);

@@ -1,6 +1,10 @@
 export const handleGuess = (codeArray, guessArray) => {
   const keyArray = [];
   let key;
+
+  if (codeArray === guessArray) {
+    return true;
+  }
   
   for (let i = 0; i < codeArray.length; i++) {
     key = 0;
@@ -40,14 +44,19 @@ export const generateMasterCode = (codeLen, numColors) => {
 
 export const generateBoardRows = (codeLen, numGuesses) => {
   const boardArray = [];
-  const boardRow = [];
+  const codePegs = [];
+  const keyPegs = [];
 
   for (let i = 0; i < codeLen; i++) {
-    boardRow.push(0);
+    codePegs.push(0);
+    keyPegs.push(0);
   }
 
   for (let j = 0; j < numGuesses; j++) {
-    boardArray.push(boardRow.slice());
+    boardArray.push({
+      codePegs: codePegs.slice(),
+      keyPegs: keyPegs.slice()
+    });
   }
 
   return boardArray;

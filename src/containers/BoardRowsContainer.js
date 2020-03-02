@@ -15,9 +15,10 @@ export default class extends Component {
     const boardRowsArray = [];
 
     for (let i = 0; i < boardRows.length; i++) {
+      console.log("boardRow: ", boardRows[i]);
       boardRowsArray.push(
-        <div key={i+1}>
-          <BoardRow codePegs={boardRows[i]} />
+        <div className="row" key={i+1}>
+          <BoardRow codePegs={boardRows[i].codePegs} keyPegs={boardRows[i].keyPegs}/>
         </div>
       );
     }

@@ -19,8 +19,8 @@ export default class BoardPalette extends Component {
 
     for (let i = 1; i <= this.props.numColors; i++) {
       palette.push(
-        <div key={i} className="mx-auto py-1">
-          <Peg onClick={this.handlePaletteClick} color={i} />
+        <div key={i} className="col-4 mx-auto py-1">
+          <Peg onClick={this.handlePaletteClick} color={i} type="palette" />
         </div>
       );
     }
