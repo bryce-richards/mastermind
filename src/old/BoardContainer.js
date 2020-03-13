@@ -7,14 +7,27 @@ export default class BoardContainer extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { };
+    this.state = {
+      selectedColor: 0
+    };
+
+    this.handlePaletteClick = this.handlePaletteClick.bind(this);
   }
+
+  handlePaletteClick(selectedColor) {
+    this.setState({
+      selectedColor
+    });
+  }
+
 
   render() {
     return (
       <div className="row" style={{marginTop: "24px"}}>
         <div className="col-2 offset-1 ">
-          <BoardPalette {...this.props} />
+          <BoardPalette 
+            {...this.props} 
+            onPaletteClick={this.handlePaletteClick()} />
         </div>
         <div className="col-6 offset-1">
           <div className="row">
@@ -24,7 +37,9 @@ export default class BoardContainer extends Component {
           </div>
           <div className="row" style={{marginTop: "24px"}}>
             <div className="col">
-              <BoardRowsContainer {...this.props} />
+              <BoardRowsContainer 
+                {...this.props} 
+                selectedColor={this.state.selectedColor}/>
             </div>
           </div>
         </div>

@@ -6,6 +6,12 @@ export default class BoardRowGuess extends Component {
     super(props);
 
     this.state = {};
+
+    this.handleGuessClick = this.handleGuessClick.bind(this);
+  }
+  
+  handleGuessClick() {
+    
   }
 
   buildRows() {
@@ -14,7 +20,10 @@ export default class BoardRowGuess extends Component {
     return codePegs.map((peg, i) => {
       return (
         <div key={i+1} className="mx-2">
-          <Peg color={peg} type="guess"/>
+          <Peg 
+            onClick={this.handleGuessClick}
+            color={peg} 
+            type="guess"/>
         </div>
       )
     })

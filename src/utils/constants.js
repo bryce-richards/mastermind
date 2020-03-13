@@ -1,4 +1,4 @@
-export const pegColors = {
+export const themes = {
   neon: {
     0: "#1A1110", // black
     1: "#FD5B78", // red
@@ -15,4 +15,3 @@ export const keyColors = {
   1: "#FF3855", // color & position
   2: "#FEFEFE" // color only
 }
-

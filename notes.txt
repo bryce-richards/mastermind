@@ -1,0 +1,47 @@
+GameData: {
+	settings: {					// driven by settings tab
+		numGuesses: 12,				
+		codeLength: 4,			
+		numColors: 6,
+		colorTheme: 'default'
+	},
+	game: {
+		gameplay: {
+			turnNum: 0,
+			selectedColor: 0
+		},
+		masterCode: [],
+		boardCodes: {
+			1: {
+				guess: [0,0,0,0],
+				key: [0,0,0,0]
+			}...
+			
+			12: {
+				guess: [0,0,0,0],
+				key: [0,0,0,0]
+			}
+		}
+	},
+	palette: {
+		colors: [1,2,3,4,5,6]		// driven by selected theme
+	}
+}
+
+//game
+info/gameStarted
+info/turnEnded
+master/gameStarted
+board/codeSubmitted
+board/pegSelected
+board/newTurn
+
+//palette
+colorsUpdated
+colorSelected
+
+//settings
+numGuessesChanged
+codeLengthChanged
+numColorsChanged
+colorThemeChanged

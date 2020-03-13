@@ -20,16 +20,22 @@ export const handleGuess = (codeArray, guessArray) => {
       }
     }
 
-    if (key > 0) {
-      keyArray.push(key);
-    }
+    keyArray.push(key);
   }
 
-  if (keyArray.length > 1) {
     return randomizeKey(keyArray);
-  } else {
-    return keyArray;
+};
+
+const randomizeKey = keyArray => {
+  let randomizedArray = [];
+  let randomIndex;
+
+  while (keyArray.length > 0) {
+    randomIndex = Math.floor(Math.random * keyArray.length);
+    randomizedArray.push(keyArray.splice(randomIndex, 1));
   }
+
+  return randomizedArray;
 };
 
 export const generateMasterCode = (codeLen, numColors) => {
@@ -60,17 +66,4 @@ export const generateBoardRows = (codeLen, numGuesses) => {
   }
 
   return boardArray;
-};
-
-const randomizeKey = keyArray => {
-  let randomizedArray = [];
-  let randomIndex;
-
-  while (keyArray.length > 0) {
-    randomIndex = Math.floor(Math.randomn * keyArray.length);
-
-    randomizedArray.push(keyArray.splice(randomIndex, 1));
-  }
-
-  return randomizedArray;
 };

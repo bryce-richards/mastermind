@@ -1,17 +1,21 @@
 import React, { Component } from 'react';
-import Peg from '../components/Peg';
+import Peg from './Peg';
 
 export default class BoardPalette extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+  
+    };
 
     this.handlePaletteClick = this.handlePaletteClick.bind(this);
   }
 
-  handlePaletteClick() {
-
+  handlePaletteClick(color) {
+    const { onPaletteClick } = this.props;
+    
+    onPaletteClick(color);
   }
 
   renderPalette() {
@@ -19,8 +23,11 @@ export default class BoardPalette extends Component {
 
     for (let i = 1; i <= this.props.numColors; i++) {
       palette.push(
-        <div key={i} className="col-4 mx-auto py-1">
-          <Peg onClick={this.handlePaletteClick} color={i} type="palette" />
+        <div key={i} className="col-4 mx-auto my-1">
+          <Peg 
+            onClick={this.handlePaletteClick} 
+            color={i} 
+            type="palette" />
         </div>
       );
     }
@@ -35,7 +42,7 @@ export default class BoardPalette extends Component {
           <div className="row justify-content-center">
             <h3 className="font-weight-light">Palette</h3>
           </div>
-          <div className="row mx-auto">
+          <div className="row justify-content-center">
             {this.renderPalette()}
           </div>
         </div>

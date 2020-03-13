@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import BoardRowGuess from '../components/BoardRowGuess';
+import BoardRowGuess from './BoardRowGuess';
 
 export default class MasterRow extends Component {
   constructor(props) {

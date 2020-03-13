@@ -15,7 +15,7 @@ export default class App extends Component {
       codeLen: 4,
       numColors: 6,
       style: "neon",
-      paletteColor: 0,
+      selectedColor: 0,
       guess: 0
     };
 

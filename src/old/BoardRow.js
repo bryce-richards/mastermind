@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import BoardRowGuess from '../components/BoardRowGuess';
-import BoardRowKey from '../components/BoardRowKey';
+import BoardRowGuess from './BoardRowGuess';
+import BoardRowKey from './BoardRowKey';
+import GuessSubmitButton from './GuessSubmitButton';
 import { handleGuess } from '../utils/helpers';
 
 export default class BoardRow extends Component {
@@ -28,6 +29,11 @@ export default class BoardRow extends Component {
           <div className="col-8">
             <div className="row justify-content-center my-2">
               <BoardRowGuess codePegs={this.props.codePegs} />
+            </div>
+          </div>
+          <div className="col-2">
+            <div className="row">
+              <GuessSubmitButton active={this.state.active}/>
             </div>
           </div>
         </div>

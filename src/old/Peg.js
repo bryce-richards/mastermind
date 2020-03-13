@@ -12,15 +12,23 @@ export default class Peg extends Component {
     super(props);
 
     this.state = {
-      style: "neon",
-      color: 0
+      style: "neon"
     };
+  }
+
+  handlePegClick() { 
+    const { color, onClick } = this.props;
+
+    onClick(color);
   }
 
   render() {
     return (
       <div style={{color: pegColors[this.state.style][this.props.color]}}>
-        <i className={`fad fa-circle fa-${pegSize[this.props.type]}`}/>
+        <i 
+          className={`fad fa-circle fa-${pegSize[this.props.type]}`}
+          onClick={this.handlePegClick} 
+        />
       </div>
     );
   }
