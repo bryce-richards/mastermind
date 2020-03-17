@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Peg from './Peg';
 
-export default class BoardPalette extends Component {
+export default class Palette extends Component {
   constructor(props) {
     super(props);
 

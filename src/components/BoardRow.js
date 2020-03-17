@@ -1,43 +1,55 @@
-import React, { Component } from 'react';
-import BoardRowGuess from './BoardRowGuess';
+import React from "react";
+import BoardRowCode from './BoardRowCode';
 import BoardRowKey from './BoardRowKey';
-import GuessSubmitButton from './GuessSubmitButton';
+import BoardRowSubmit from './BoardRowGuess';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { codeSubmitted } from '../actions';
 import { handleGuess } from '../utils/helpers';
 
-export default class BoardRow extends Component {
-  constructor(props) {
-    super(props);
+function mapState(state, ownProps) {
+  const { boardIndex } = ownProps;
+  const { info, master, board } = state;
+  const boardRow = board[boardIndex];
+  const turn = info.turn;
+  const active = boardRow === turn;
 
-    this.state = {
-      active: false
-    };
-
-    this.handleGuess = this.handleGuess.bind(this);
-  }
-  
-  handleGuess() {
-
-  }
-
-  render() {
-    return (
-      <div className="col">
-        <div className="row">
-          <div className="col-2">
-            <BoardRowKey keyPegs={this.props.keyPegs} />
-          </div>
-          <div className="col-8">
-            <div className="row justify-content-center my-2">
-              <BoardRowGuess codePegs={this.props.codePegs} />
-            </div>
-          </div>
-          <div className="col-2">
-            <div className="row">
-              <GuessSubmitButton active={this.state.active}/>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
+  return {
+    master,
+    boardRow,
+    turn,
+    active
   }
 }
+
+const mapDispatch = dispatch => {
+  return {
+    handleCodeSubmit: ({ master, boardRow, turn }) => {
+      const boardKey = handleGuess(master, boardRow);
+
+      dispatch(codeSubmitted(turn, boardKey));
+    }
+  }
+}
+
+const BoardRow = props => (
+  <div>
+    <div>
+      <BoardRowKey />
+    </div>
+    <div>
+      <BoardRowCode />
+    </div>
+    <div>
+      <BoardRowSubmit onCodeSubmit={props.handleCodeSubmit} active={props.active}/>
+    </div>
+  </div>
+);
+
+BoardRow.propTypes = {
+};
+
+export default connect(
+  mapState,
+  mapDispatch
+)(BoardRow);

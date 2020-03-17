@@ -19,13 +19,13 @@ export const newGameStarted = (master, board) => {
   };
 };
 
-export const codeSubmitted = (turn, key) => (dispatch, getState) => {
+export const codeSubmitted = (turn, boardKey) => (dispatch, getState) => {
   const { settings } = getState();
 
   dispatch({
     type: CODE_SUBMITTED,
     turn,
-    key
+    boardKey
   });
 
   // if not the last turn, start new turn
@@ -41,17 +41,13 @@ export const codeSubmitted = (turn, key) => (dispatch, getState) => {
   }
 };
 
-export const boardSelected = (row, peg) => (dispatch, getState) => {
-  const { palette } = getState();
-
-  if (palette.activeColor > 0) {
-    dispatch({
-      type: BOARD_SELECTED,
-      row,
-      peg,
-      color: palette.activeColor
-    });
-  }
+export const boardSelected = (boardRow, pegIndex, activeColor) => {
+  return{
+    type: BOARD_SELECTED,
+    boardRow,
+    pegIndex,
+    activeColor
+  };
 };
 
 export const themeChanged = theme => {

@@ -7,13 +7,13 @@ import {
 
 const updateBoardCode = (array, action) => {
   return array.map((peg, index) => {
-    if (index !== action.peg) {
+    if (index !== action.pegIndex) {
       return peg;
     }
 
     return {
       ...peg,
-      ...action.peg
+      ...action.pegIndex
     }
   });
 }
@@ -42,9 +42,9 @@ const board = (state = {}, action) => {
     case BOARD_SELECTED:
       return {
         ...state,
-        [action.row]: {
-          ...state[action.row],
-          code: updateBoardCode(state[action.row].code, action)
+        [action.boardIndex]: {
+          ...state[action.boardIndex],
+          code: updateBoardCode(state[action.boardIndex].code, action)
         }
       }
     default:

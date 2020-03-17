@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { newGameStarted } from '../actions';
 
-import { createNewMaster, createNewBoard } from '../utils/helpers'
+import { createNewMaster, createNewBoard } from '../utils/helpers';
 
 const mapState = ({ settings }) => ({
   numGuesses: settings.numGuesses,
@@ -21,6 +21,7 @@ const mapDispatch = dispatch => {
     }
   }
 }
+
 const Navbar = ({ onNewGameClick, numGuesses, codeLength, numColors }) => (
   <div>
     <nav className="navbar sticky-top navbar-dark bg-dark">

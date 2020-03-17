@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import BoardRowsContainer from './BoardRowsContainer';
-import BoardPalette from './BoardPalette';
+import BoardPalette from './Palette';
 import MasterRow from './MasterRow';
 
 export default class BoardContainer extends Component {
