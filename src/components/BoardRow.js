@@ -1,22 +1,26 @@
 import React from "react";
 import BoardRowCode from './BoardRowCode';
 import BoardRowKey from './BoardRowKey';
-import BoardRowSubmit from './BoardRowGuess';
+import BoardRowSubmit from './BoardRowSubmit';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { codeSubmitted } from '../actions';
 import { handleGuess } from '../utils/helpers';
 
 function mapState(state, ownProps) {
-  const { boardIndex } = ownProps;
+  const boardIndex = ownProps.key;
   const { info, master, board } = state;
   const boardRow = board[boardIndex];
+  const boardCode = boardRow.code; 
+  const boardKey = boardRow.key;
   const turn = info.turn;
-  const active = boardRow === turn;
+  const active = boardIndex === turn;
 
   return {
     master,
-    boardRow,
+    boardIndex,
+    boardCode,
+    boardKey,
     turn,
     active
   }
@@ -24,10 +28,10 @@ function mapState(state, ownProps) {
 
 const mapDispatch = dispatch => {
   return {
-    handleCodeSubmit: ({ master, boardRow, turn }) => {
+    handleCodeSubmit: ({ master, boardIndex, boardRow, turn }) => {
       const boardKey = handleGuess(master, boardRow);
 
-      dispatch(codeSubmitted(turn, boardKey));
+      dispatch(codeSubmitted(boardIndex, boardKey, turn));
     }
   }
 }
@@ -35,18 +39,26 @@ const mapDispatch = dispatch => {
 const BoardRow = props => (
   <div>
     <div>
-      <BoardRowKey />
+      <BoardRowKey index={ props.boardIndex } key={ props.boardKey }/>
     </div>
     <div>
-      <BoardRowCode />
+      <BoardRowCode index={ props.boardIndex } code={ props.boardCode }/>
     </div>
     <div>
-      <BoardRowSubmit onCodeSubmit={props.handleCodeSubmit} active={props.active}/>
+      <BoardRowSubmit onCodeSubmit={ props.handleCodeSubmit(...props) } active={props.active}/>
     </div>
   </div>
 );
 
 BoardRow.propTypes = {
+  handleCodeSubmit: PropTypes.func.isRequired,
+  master: PropTypes.array.isRequired,
+  boardIndex: PropTypes.number.isRequired,
+  boardRow: PropTypes.object.isRequired,
+  boardCode: PropTypes.array.isRequired,
+  boardKey: PropTypes.array.isRequired,
+  turn: PropTypes.number.isRequired,
+  active: PropTypes.bool.isRequired
 };
 
 export default connect(

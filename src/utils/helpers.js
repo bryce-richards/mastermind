@@ -45,7 +45,7 @@ export const createNewMaster = (codeLength, numColors) => {
 };
 
 export const createNewBoard = (codeLength, numGuesses) => {
-  const newBoard = {},
+  const newBoard = [],
         emptyCode = [],
         emptyKey = [];
 
@@ -56,11 +56,11 @@ export const createNewBoard = (codeLength, numGuesses) => {
   }
 
   // build board
-  for (let j = 1; j <= numGuesses; j++) {
-    newBoard[j] = {
+  for (let j = 0; j < numGuesses; j++) {
+    newBoard.push({
       code: emptyCode.slice(),
       key: emptyKey.slice()
-    };
+    });
   }
 
   return newBoard;

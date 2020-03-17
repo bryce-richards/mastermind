@@ -1,49 +1,28 @@
-import React, { Component } from 'react';
-import BoardRowsContainer from './BoardRowsContainer';
-import BoardPalette from './Palette';
-import MasterRow from './MasterRow';
+import React from "react";
+import BoardRow from './BoardRow';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
-export default class BoardContainer extends Component {
-  constructor(props) {
-    super(props);
+const mapState = ({ board }) => ({
+  board
+});
 
-    this.state = {
-      selectedColor: 0
-    };
+const BoardContainer = ({ board }) => (
+  <div>
+    { board.map((row, i) => 
+      <BoardRow key={i} boardRow={row} />
+    )}
+  </div>
+);
 
-    this.handlePaletteClick = this.handlePaletteClick.bind(this);
-  }
+BoardContainer.propTypes = {
+  board: PropTypes.arrayOf(PropTypes.shape({
+    code: PropTypes.arrayOf.isRequired,
+    key: PropTypes.arrayOf.isRequired
+  }).isRequired)
+};
 
-  handlePaletteClick(selectedColor) {
-    this.setState({
-      selectedColor
-    });
-  }
-
-
-  render() {
-    return (
-      <div className="row" style={{marginTop: "24px"}}>
-        <div className="col-2 offset-1 ">
-          <BoardPalette 
-            {...this.props} 
-            onPaletteClick={this.handlePaletteClick()} />
-        </div>
-        <div className="col-6 offset-1">
-          <div className="row">
-            <div className="col-8 offset-2">
-              <MasterRow {...this.props} />
-            </div>
-          </div>
-          <div className="row" style={{marginTop: "24px"}}>
-            <div className="col">
-              <BoardRowsContainer 
-                {...this.props} 
-                selectedColor={this.state.selectedColor}/>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-}
+export default connect(
+  mapState,
+  null
+)(BoardContainer);

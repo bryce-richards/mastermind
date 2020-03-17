@@ -7,7 +7,7 @@ const BoardRowSubmit = props => (
     <button 
       type="button" 
       class="btn btn-success" 
-      onClick={props.onCodeSubmit}
+      onClick={() => props.onCodeSubmit}
       visible={props.active} />
   </div>
 );
