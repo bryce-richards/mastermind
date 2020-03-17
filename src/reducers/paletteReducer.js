@@ -1,34 +1,42 @@
 import {
+  NEW_GAME_STARTED,
   THEME_CHANGED,
-  PALETTE_SELECTED,
-  GET_ACTIVE_COLOR
+  PALETTE_SELECTED
 } from '../actions/actionTypes';
 
+import { themes, defaultSettings } from '../utils/constants';
+
+const { theme } = defaultSettings;
+const colors = themes[theme];
+
 const paletteDefaultState = {
-  theme: 'neon',
+  theme,
+  colors,
   activeColor: 0
 };
 
-const settings = (state = paletteDefaultState, action) => {
+const palette = (state = paletteDefaultState, action) => {
   switch (action.type) {
+    case NEW_GAME_STARTED:
+      return {
+        theme: action.theme,
+        colors: themes[action.theme],
+        activeColor: 0
+      }
     case THEME_CHANGED:
       return {
         ...state,
-        theme: action.theme
+        theme: action.theme,
+        colors: themes[action.theme]
       };
     case PALETTE_SELECTED:
       return {
         ...state,
         activeColor: action.color
       };
-    case NUM_COLORS_CHANGED:
-      return {
-        ...state,
-        numColors: action.numColors
-      };
     default:
-      return state
+      return state;
   }
 };
 
-export default settings;
+export default palette;

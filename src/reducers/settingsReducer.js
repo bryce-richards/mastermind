@@ -4,10 +4,14 @@ import {
   NUM_COLORS_CHANGED
 } from '../actions/actionTypes';
 
+import { defaultSettings } from '../utils/constants';
+
+const { numGuesses, codeLength, numColors } = defaultSettings;
+
 const settingsDefaultState = {
-  numGuesses: 12,
-  codeLength: 4,
-  numColors: 6
+  numGuesses,
+  codeLength,
+  numColors
 };
 
 const settings = (state = settingsDefaultState, action) => {
@@ -28,7 +32,7 @@ const settings = (state = settingsDefaultState, action) => {
         numColors: action.numColors
       };
     default:
-      return state
+      return state;
   }
 };
 

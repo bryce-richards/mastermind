@@ -8,10 +8,17 @@ export const themes = {
     5: "#50BFE6", // blue
     6: "#EE34D2" // purple
   }
-}
+};
 
 export const keyColors = {
   0: "#1A1110", // black
   1: "#FF3855", // color & position
   2: "#FEFEFE" // color only
-}
+};
+
+export const defaultSettings = {
+    numGuesses: 12,
+    codeLength: 4,
+    numColors: 6,
+    theme: 'neon'
+};

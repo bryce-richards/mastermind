@@ -3,8 +3,10 @@ import palette from './paletteReducer';
 import game from './gameReducer';
 import settings from './settingsReducer';
 
-export default combineReducers({
+const appReducer = combineReducers({
   palette,
   game,
   settings
 });
+
+export default appReducer;

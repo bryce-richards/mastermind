@@ -24,4 +24,4 @@ yarn-error.log*
 
 ./src/defaultComponent.js
 
-./notes.txt
+/notes

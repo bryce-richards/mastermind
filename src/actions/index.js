@@ -1,80 +1,88 @@
 import {
   NEW_GAME_STARTED,
-  NEW_TURN_STARTED,
+  GAME_ENDED,
   CODE_SUBMITTED,
+  NEW_TURN,
   BOARD_SELECTED,
   THEME_CHANGED,
   PALETTE_SELECTED,
-  GET_ACTIVE_COLOR,
   NUM_GUESSES_CHANGED,
   CODE_LENGTH_CHANGED,
   NUM_COLORS_CHANGED
 } from './actionTypes';
 
-export const newGameStarted = () => {
-  return { 
-    type: NEW_GAME_STARTED
+export const newGameStarted = (master, board) => {
+  return {
+    type: NEW_GAME_STARTED,
+    master,
+    board
   };
 };
 
-export const newTurnStarted = (prevTurn) => {
-  return {
-    type: NEW_TURN_STARTED,
-    newTurn: prevTurn + 1
-  };
-};
+export const codeSubmitted = (turn, key) => (dispatch, getState) => {
+  const { settings } = getState();
 
-export const codeSubmitted = (guess) => {
-  return {
+  dispatch({
     type: CODE_SUBMITTED,
-    guess
-  };
+    turn,
+    key
+  });
+
+  // if not the last turn, start new turn
+  if (turn < settings.numGuesses) {
+    dispatch({
+      type: NEW_TURN,
+      newTurn: turn + 1
+    });
+  } else {
+    dispatch({
+      type: GAME_ENDED
+    });
+  }
 };
 
-export const boardSelected = (rowId, pegIndex, newColor) => {
-  return {
-    type: BOARD_SELECTED,
-    rowId,
-    pegIndex,
-    newColor
-  };
+export const boardSelected = (row, peg) => (dispatch, getState) => {
+  const { palette } = getState();
+
+  if (palette.activeColor > 0) {
+    dispatch({
+      type: BOARD_SELECTED,
+      row,
+      peg,
+      color: palette.activeColor
+    });
+  }
 };
 
-export const getActiveColor = () => {
-  return {
-    type: GET_ACTIVE_COLOR
-  };
-};
-
-export const themeChanged = (theme) => {
+export const themeChanged = theme => {
   return {
     type: THEME_CHANGED,
     theme
   };
 };
 
-export const paletteSelected = (newColor) => {
+export const paletteSelected = color => {
   return {
     type: PALETTE_SELECTED,
-    newColor
+    color
   };
 };
 
-export const numGuessesChanged = (numGuesses) => {
+export const numGuessesChanged = numGuesses => {
   return {
     type: NUM_GUESSES_CHANGED,
     numGuesses
-  };
+  }
 };
 
-export const codeLengthChanged = (codeLength) => {
+export const codeLengthChanged = codeLength => {
   return {
     type: CODE_LENGTH_CHANGED,
     codeLength
   };
 };
 
-export const numColorsChanged = (numColors) => {
+export const numColorsChanged = numColors => {
   return {
     type: NUM_COLORS_CHANGED,
     numColors

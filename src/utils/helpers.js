@@ -1,16 +1,12 @@
-export const handleGuess = (codeArray, guessArray) => {
+export const handleGuess = (master, guess) => {
   const keyArray = [];
   let key;
-
-  if (codeArray === guessArray) {
-    return true;
-  }
   
-  for (let i = 0; i < codeArray.length; i++) {
+  for (let i = 0; i < master.length; i++) {
     key = 0;
 
-    for (let j = 0; j < guessArray.length; j++) {
-      if (guessArray[j] === codeArray[i]) {
+    for (let j = 0; j < guess.length; j++) {
+      if (guess[j] === master[i]) {
         if (j === i) {
           key = 1;
           break;
@@ -26,44 +22,46 @@ export const handleGuess = (codeArray, guessArray) => {
     return randomizeKey(keyArray);
 };
 
-const randomizeKey = keyArray => {
-  let randomizedArray = [];
+const randomizeKey = key => {
+  const randomizedArray = [];
   let randomIndex;
 
-  while (keyArray.length > 0) {
-    randomIndex = Math.floor(Math.random * keyArray.length);
-    randomizedArray.push(keyArray.splice(randomIndex, 1));
+  while (key.length > 0) {
+    randomIndex = Math.floor(Math.random * key.length);
+    randomizedArray.push(key.splice(randomIndex, 1));
   }
 
   return randomizedArray;
 };
 
-export const generateMasterCode = (codeLen, numColors) => {
-  let codeArray = [];
+export const createNewMaster = (codeLength, numColors) => {
+  const newMaster = [];
 
-  for (let i = 0; i < codeLen; i++) {
-    codeArray.push(Math.floor(Math.random() * numColors) + 1);
+  for (let i = 0; i < codeLength; i++) {
+    newMaster.push(Math.floor(Math.random() * numColors) + 1);
   }
 
-  return codeArray;
+  return newMaster;
 };
 
-export const generateBoardRows = (codeLen, numGuesses) => {
-  const boardArray = [];
-  const codePegs = [];
-  const keyPegs = [];
+export const createNewBoard = (codeLength, numGuesses) => {
+  const newBoard = {},
+        emptyCode = [],
+        emptyKey = [];
 
-  for (let i = 0; i < codeLen; i++) {
-    codePegs.push(0);
-    keyPegs.push(0);
+  // build empty row
+  for (let i = 0; i < codeLength; i++) {
+    emptyCode.push(0);
+    emptyKey.push(0);
   }
 
-  for (let j = 0; j < numGuesses; j++) {
-    boardArray.push({
-      codePegs: codePegs.slice(),
-      keyPegs: keyPegs.slice()
-    });
+  // build board
+  for (let j = 1; j <= numGuesses; j++) {
+    newBoard[j] = {
+      code: emptyCode.slice(),
+      key: emptyKey.slice()
+    };
   }
 
-  return boardArray;
+  return newBoard;
 };
