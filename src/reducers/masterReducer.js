@@ -1,6 +1,6 @@
 import {
   NEW_GAME_STARTED
-} from '../../actions/actionTypes';
+} from '../actions/actionTypes';
 
 const master = (state = [], action) => {
   switch (action.type) {

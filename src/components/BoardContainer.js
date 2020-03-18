@@ -1,4 +1,5 @@
 import React from "react";
+import MasterRow from './MasterRow';
 import BoardRow from './BoardRow';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -9,9 +10,14 @@ const mapState = ({ board }) => ({
 
 const BoardContainer = ({ board }) => (
   <div>
-    { board.map((row, i) => 
-      <BoardRow key={i} boardRow={row} />
-    )}
+    <div>
+      <MasterRow />
+    </div>  
+    <div>
+      { board.map((row, i) => 
+        <BoardRow key={i} index={i} boardRow={row} />
+      )}
+    </div>
   </div>
 );
 

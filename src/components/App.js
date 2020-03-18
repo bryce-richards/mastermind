@@ -1,17 +1,17 @@
 import React from 'react';
-import Navbar from '../components/Navbar';
-import BoardContainer from './BoardContainer';
+import Navbar from './Navbar';
+import MainSection from './MainSection';
 
 
 const App = () => (
   <div>
-        <header>
-          <Navbar />
-        </header>
-        {/* <main className="container-fluid">
-          <BoardContainer {...this.state} />
-        </main> */}
-      </div>
+    <header>
+      <Navbar />
+    </header>
+    <main className="container-fluid">
+      <MainSection />
+    </main>
+  </div>
 );
 
 export default App;

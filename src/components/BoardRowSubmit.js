@@ -6,15 +6,19 @@ const BoardRowSubmit = props => (
   <div>
     <button 
       type="button" 
-      class="btn btn-success" 
+      className={`btn btn-success ${props.visible ? "visible" : "invisible"}`}
       onClick={() => props.onCodeSubmit}
-      visible={props.active} />
+      visible={props.visible.toString()} 
+      disabled={!props.enabled}>
+      Submit  
+    </button>
   </div>
 );
 
 BoardRowSubmit.propTypes = {
   onCodeSubmit: PropTypes.func.isRequired,
-  active: PropTypes.bool.isRequired
+  visible: PropTypes.bool.isRequired,
+  enabled: PropTypes.bool.isRequired
 };
 
 export default BoardRowSubmit;

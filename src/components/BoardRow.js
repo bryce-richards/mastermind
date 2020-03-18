@@ -8,13 +8,21 @@ import { codeSubmitted } from '../actions';
 import { handleGuess } from '../utils/helpers';
 
 function mapState(state, ownProps) {
-  const boardIndex = ownProps.key;
-  const { info, master, board } = state;
-  const boardRow = board[boardIndex];
+  const boardIndex = ownProps.index;
+  const { boardRow } = ownProps
+  const { info, master } = state;
   const boardCode = boardRow.code; 
   const boardKey = boardRow.key;
   const turn = info.turn;
-  const active = boardIndex === turn;
+
+  const active = boardIndex === turn - 1;
+  let enabled = active;
+
+  for (let peg of boardCode) {
+    if (peg === 0) {
+      enabled = false;
+    }
+  }
 
   return {
     master,
@@ -22,7 +30,8 @@ function mapState(state, ownProps) {
     boardCode,
     boardKey,
     turn,
-    active
+    active,
+    enabled
   }
 }
 
@@ -38,14 +47,14 @@ const mapDispatch = dispatch => {
 
 const BoardRow = props => (
   <div>
-    <div>
+    {/* <div>
       <BoardRowKey index={ props.boardIndex } key={ props.boardKey }/>
+    </div> */}
+    <div>
+      <BoardRowCode index={props.boardIndex} code={props.boardCode}/>
     </div>
     <div>
-      <BoardRowCode index={ props.boardIndex } code={ props.boardCode }/>
-    </div>
-    <div>
-      <BoardRowSubmit onCodeSubmit={ props.handleCodeSubmit(...props) } active={props.active}/>
+      <BoardRowSubmit onCodeSubmit={() => props.handleCodeSubmit({...props}) } visible={props.active} enabled={props.enabled}/>
     </div>
   </div>
 );

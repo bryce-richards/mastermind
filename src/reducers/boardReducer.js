@@ -2,7 +2,7 @@ import {
   NEW_GAME_STARTED,
   CODE_SUBMITTED,
   BOARD_SELECTED
-} from '../../actions/actionTypes';
+} from '../actions/actionTypes';
 
 const updateBoardCode = (code, action) => {
   return code.map((peg, i) => {

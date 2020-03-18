@@ -1,16 +1,31 @@
 import React from "react";
 import Palette from './Palette';
-import Board from './BoardContainer.js';
+import BoardContainer from './BoardContainer.js';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
-const MainSection = () => (
-  <div>
+const mapState = ({ info }) => ({
+  active: info.active
+})
+
+const MainSection = ({ active }) => (
+  <div className="row">
     <div className="col-4">
       <Palette />
     </div>
-    {/* <div className="col-8">
-      <Board />
-    </div> */}
+    <div className="col-8">
+      {
+        active ? <BoardContainer /> : null
+      }
+    </div>
   </div>
 );
 
-export default MainSection;
+MainSection.propTypes = {
+  active: PropTypes.bool.isRequired
+}
+
+export default connect(
+  mapState,
+  null
+)(MainSection);

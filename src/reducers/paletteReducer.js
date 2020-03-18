@@ -17,7 +17,7 @@ const palette = (state = paletteDefaultState, action) => {
   switch (action.type) {
     case NEW_GAME_STARTED:
       return {
-        theme: action.theme,
+        ...state,
         activeColor: 0
       }
     case THEME_CHANGED:
@@ -26,9 +26,10 @@ const palette = (state = paletteDefaultState, action) => {
         theme: action.theme
       };
     case PALETTE_SELECTED:
+
       return {
         ...state,
-        activeColor: action.pegColor
+        activeColor: action.color
       };
     default:
       return state;

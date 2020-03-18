@@ -2,7 +2,7 @@ import {
   NEW_GAME_STARTED,
   NEW_TURN,
   GAME_ENDED
-} from '../../actions/actionTypes';
+} from '../actions/actionTypes';
 
 const infoDefaultState = {
   active: false,
@@ -14,7 +14,7 @@ const info = (state = infoDefaultState, action) => {
     case NEW_GAME_STARTED:
       return {
         active: true,
-        turn: 0
+        turn: 1
       };
     case NEW_TURN:
       return {

@@ -1,52 +1,56 @@
-import React, { Component } from 'react';
+import React from "react";
 import Peg from './Peg';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { paletteSelected } from '../actions';
 
-export default class Palette extends Component {
-  constructor(props) {
-    super(props);
+const mapState = ({ settings, palette }) => ({
+  numColors: settings.numColors,
+  activeColor: palette.activeColor
+});
 
-    this.state = {
-  
-    };
-
-    this.handlePaletteClick = this.handlePaletteClick.bind(this);
-  }
-
-  handlePaletteClick(color) {
-    const { onPaletteClick } = this.props;
-    
-    onPaletteClick(color);
-  }
-
-  renderPalette() {
-    let palette = [];
-
-    for (let i = 1; i <= this.props.numColors; i++) {
-      palette.push(
-        <div key={i} className="col-4 mx-auto my-1">
-          <Peg 
-            onClick={this.handlePaletteClick} 
-            color={i} 
-            type="palette" />
-        </div>
-      );
+const mapDispatch = dispatch => {
+  return {
+    handlePaletteClick: color => {
+      dispatch(paletteSelected(color));
     }
-
-    return palette;
-  }
-
-  render() {
-    return (
-      <div className="row">
-        <div className="col">
-          <div className="row justify-content-center">
-            <h3 className="font-weight-light">Palette</h3>
-          </div>
-          <div className="row justify-content-center">
-            {this.renderPalette()}
-          </div>
-        </div>
-      </div>
-    );
   }
 }
+
+const buildPalette = ({ handlePaletteClick, numColors }) => {
+  const palette = [];
+
+  for (let i = 0; i < numColors; i++) {
+    palette.push(
+      <Peg
+        key={i}
+        index={i}
+        color={i + 1}
+        type="palette"
+        onPegClick={() => handlePaletteClick(i + 1)} />
+    );
+  }
+
+  return palette;
+}
+
+const Palette = props => (
+  <div>
+    { buildPalette(props) }
+    <div>
+      <h2>Selected Color</h2>
+      <Peg color={props.activeColor} type="display" />
+    </div>
+  </div>
+);
+
+
+Palette.propTypes = {
+  handlePaletteClick: PropTypes.func.isRequired,
+  numColors: PropTypes.number.isRequired
+};
+
+export default connect(
+  mapState,
+  mapDispatch
+)(Palette);
