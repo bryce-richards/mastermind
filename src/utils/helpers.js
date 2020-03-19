@@ -32,8 +32,6 @@ export const handleGuess = (master, guess) => {
         } else {
           initialKeys[masterColor].push(2);
         }
-        
-        initialKeys[masterColor].push(guessIndex === masterIndex ? 1 : 2);
       }
     }
   }
