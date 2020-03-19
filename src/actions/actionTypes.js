@@ -1,8 +1,8 @@
 
 export const NEW_GAME_STARTED = 'root/newGameStarted';
-export const GAME_ENDED = 'game/newTurnStarted';
-export const CODE_SUBMITTED = 'game/codeSubmitted';
-export const BOARD_SELECTED = 'game/boardSelected';
+export const GAME_ENDED = 'info/gameEnded';
+export const CODE_SUBMITTED = 'board/codeSubmitted';
+export const BOARD_SELECTED = 'board/boardSelected';
 export const NEW_TURN = 'info/newTurn';
 
 export const THEME_CHANGED = 'palette/themeChanged';

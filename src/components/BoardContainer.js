@@ -9,11 +9,11 @@ const mapState = ({ master, board }) => ({
 });
 
 const BoardContainer = ({ master, board }) => (
-  <div>
-    <div>
+  <div className="row">
+    <div className="col-6 offset-3">
       <MasterRow code={master} />
     </div>  
-    <div>
+    <div className="col-6 offset-3">
       { board.map((row, i) => 
         <BoardRow key={i} index={i} boardRow={row} />
       )}

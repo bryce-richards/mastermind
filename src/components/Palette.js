@@ -35,12 +35,8 @@ const buildPalette = ({ handlePaletteClick, numColors }) => {
 }
 
 const Palette = props => (
-  <div>
+  <div className="row">
     { buildPalette(props) }
-    <div>
-      <h2>Selected Color</h2>
-      <Peg color={props.activeColor} type="display" />
-    </div>
   </div>
 );
 

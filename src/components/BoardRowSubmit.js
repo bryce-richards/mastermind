@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 
 const BoardRowSubmit = props => (
-  <div>
+  <div className="col-1">
     <button 
       type="button" 
       className={`btn btn-success ${props.visible ? "visible" : "invisible"}`}

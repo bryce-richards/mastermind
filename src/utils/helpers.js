@@ -1,3 +1,5 @@
+import { pegIconSize, pegColSize, themes, keyColors } from './constants';
+
 export const handleGuess = (master, guess) => {
   const masterCount = {};
   let guessMatches = 0;
@@ -91,3 +93,45 @@ export const createNewBoard = (codeLength, numGuesses) => {
 
   return newBoard;
 };
+
+export const mapPaletteState = (state, ownProps) => {
+  const { type, color } = ownProps;
+  const { palette: { activeColor },  } = state;
+  const colSize = pegColSize[type];
+  const index = ownProps.index;
+  const iconSize = pegIconSize[type];
+  let colorHex = "";
+  let selected = false;
+
+  if (color === activeColor && type === "palette") {
+    selected = true;
+  }
+
+  let onPegClick = () => {};
+  if (ownProps.hasOwnProperty("onPegClick")) {
+    onPegClick = ownProps.onPegClick;
+  }
+
+  const { 
+    palette: {
+      theme
+    }
+  } = state;
+
+  if (type === "key") {
+    colorHex = keyColors;
+  } else {
+    colorHex = themes[theme];
+  }
+
+  return {  
+    type,
+    iconSize,
+    colSize,
+    index,
+    color,
+    selected,
+    colorHex,
+    onPegClick
+  }
+}

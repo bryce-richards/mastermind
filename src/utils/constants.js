@@ -22,3 +22,17 @@ export const defaultSettings = {
     numColors: 6,
     theme: 'neon'
 };
+
+export const pegIconSize = {
+  key: "xs",
+  palette: "2x",
+  code: "3x",
+  master: "4x"
+}
+
+export const pegColSize = {
+  key: 6,
+  palette: 4,
+  code: 3,
+  master: 3
+}

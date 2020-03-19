@@ -3,7 +3,7 @@ import Peg from './Peg';
 import PropTypes from 'prop-types';
 
 const MasterRow = ({ code }) => (
-  <div>
+  <div className="row d-flex justify-content-center">
   { code.map((color, i) => 
       <Peg 
         key={i} 

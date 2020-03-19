@@ -1,61 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { themes, keyColors } from '../utils/constants';
-
-const pegIconSize = {
-  key: "xs",
-  palette: "2x",
-  display: "3x",
-  code: "3x",
-  master: "4x"
-}
+import { mapPaletteState } from '../utils/helpers';
 
 function mapState(state, ownProps) {
-  const { type, color } = ownProps;
-  const index = ownProps.index;
-  const size = pegIconSize[type];
-  let colorHex = "";
-
-  let onPegClick = () => {};
-  if (ownProps.hasOwnProperty("onPegClick")) {
-    onPegClick = ownProps.onPegClick;
-  }
-
-  const { 
-    palette: {
-      theme
-    }
-  } = state;
-
-  if (type === "key") {
-    colorHex = keyColors;
-  } else {
-    colorHex = themes[theme];
-  }
-
-  return {  
-    type,
-    size,
-    index,
-    color,
-    colorHex,
-    onPegClick
-  }
+  return mapPaletteState(state, ownProps); 
 }
 
-
 const Peg = props => (
-  <div style={{color: props.colorHex[props.color]}}>
+  <div 
+    className={`col-${props.colSize}`}
+    style={{color: props.colorHex[props.color]}}>
     <i 
-      className={`fad fa-circle fa-${props.size}`}
+      className={props.selected ? `fas fa-circle fa-${props.iconSize}` : `fad fa-circle fa-${props.iconSize}`}
       onClick={() => props.onPegClick()} />
   </div>
 );
 
 Peg.propTypes = {
   onPegClick: PropTypes.func,
-  size: PropTypes.string.isRequired,
+  iconSize: PropTypes.string.isRequired,
+  colSize: PropTypes.number.isRequired,
   index: PropTypes.number,
   color: PropTypes.number.isRequired
 };

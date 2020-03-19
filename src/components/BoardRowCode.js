@@ -25,15 +25,17 @@ const mapDispatch = dispatch => {
 }
 
 const BoardRowCode = ({ handlePegClick, boardIndex, code, activeColor }) => (
-  <div>
-    { code.map((color, i) => 
-      <Peg 
-        key={i} 
-        index={i}
-        color={color} 
-        type="code" 
-        onPegClick={() => handlePegClick(boardIndex, i, activeColor)}/>
-    )}
+  <div className="col-6">
+    <div className="row">
+      { code.map((color, i) => 
+        <Peg 
+          key={i} 
+          index={i}
+          color={color} 
+          type="code" 
+          onPegClick={() => handlePegClick(boardIndex, i, activeColor)}/>
+      )}
+    </div>
   </div>
 );
 

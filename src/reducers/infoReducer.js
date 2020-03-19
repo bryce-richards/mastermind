@@ -6,7 +6,8 @@ import {
 
 const infoDefaultState = {
   active: false,
-  turn: 0
+  turn: 0,
+  win: false
 };
 
 const info = (state = infoDefaultState, action) => {
@@ -24,7 +25,8 @@ const info = (state = infoDefaultState, action) => {
     case GAME_ENDED:
       return {
         ...state,
-        active: false
+        active: false,
+        win: action.win
       };
     default:
       return state;

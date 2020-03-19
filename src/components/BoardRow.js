@@ -46,16 +46,10 @@ const mapDispatch = dispatch => {
 }
 
 const BoardRow = props => (
-  <div>
-    <div>
-      <BoardRowKey index={props.boardIndex} code={props.boardKey}/>
-    </div>
-    <div>
-      <BoardRowCode index={props.boardIndex} code={props.boardCode}/>
-    </div>
-    <div>
-      <BoardRowSubmit onCodeSubmit={() => props.handleCodeSubmit(props)} visible={props.active} enabled={props.enabled}/>
-    </div>
+  <div className="row d-flex justify-content-around">
+    <BoardRowKey index={props.boardIndex} code={props.boardKey}/>
+    <BoardRowCode index={props.boardIndex} code={props.boardCode}/>
+    <BoardRowSubmit onCodeSubmit={() => props.handleCodeSubmit(props)} visible={props.active} enabled={props.enabled}/>
   </div>
 );
 

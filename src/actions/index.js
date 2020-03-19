@@ -8,7 +8,7 @@ import {
   PALETTE_SELECTED,
   NUM_GUESSES_CHANGED,
   CODE_LENGTH_CHANGED,
-  NUM_COLORS_CHANGED
+  NUM_COLORS_CHANGED,
 } from './actionTypes';
 
 export const newGameStarted = (master, board) => {
@@ -28,16 +28,25 @@ export const codeSubmitted = (boardIndex, boardKey, turn) => (dispatch, getState
     key: boardKey
   });
 
-  // if not the last turn, start new turn
-  if (turn < settings.numGuesses) {
+  if (boardKey.filter(key => key === 1).length === settings.codeLength) {
     dispatch({
-      type: NEW_TURN,
-      newTurn: turn + 1
-    });
+      type: GAME_ENDED,
+      win: true
+    })
   } else {
-    dispatch({
-      type: GAME_ENDED
-    });
+
+    // if not the last turn, start new turn
+    if (turn < settings.numGuesses) {
+      dispatch({
+        type: NEW_TURN,
+        newTurn: turn + 1
+      });
+    } else {
+      dispatch({
+        type: GAME_ENDED,
+        win: false
+      });
+    }
   }
 };
 
