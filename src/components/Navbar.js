@@ -31,7 +31,7 @@ const Navbar = ({ onNewGameClick, numGuesses, codeLength, numColors, win, gameOv
       </div>
       <div className="col-8">
         <div className="row d-flex justify-content-center">
-          <h2>
+          <h2 style={{color: "white"}}>
             {
               win ? "You Won!" : gameOver ? "You Lost" : ""
             }

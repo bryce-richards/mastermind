@@ -36,7 +36,12 @@ const buildPalette = ({ handlePaletteClick, numColors }) => {
 
 const Palette = props => (
   <div className="row">
-    { buildPalette(props) }
+    <div className="col-12">
+      <h3 style={{textAlign: "center"}}>Palette</h3>
+      <div className="row">
+      {  buildPalette(props) }
+      </div>
+    </div>
   </div>
 );
 

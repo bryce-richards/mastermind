@@ -6,7 +6,7 @@ export const themes = {
     3: "#FFFF66", // yellow
     4: "#66FF66", // green
     5: "#50BFE6", // blue
-    6: "#FF00CC" // purple
+    6: "#50BFE6" // purple
   }
 };
 
