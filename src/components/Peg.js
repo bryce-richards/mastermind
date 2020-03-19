@@ -9,7 +9,7 @@ function mapState(state, ownProps) {
 
 const Peg = props => (
   <div 
-    className={`col-${props.colSize}`}
+    className={`my-1 col-${props.colSize}`}
     style={{color: props.colorHex[props.color]}}>
     <i 
       className={props.selected ? `fas fa-circle fa-${props.iconSize}` : `fad fa-circle fa-${props.iconSize}`}

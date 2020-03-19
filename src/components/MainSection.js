@@ -10,10 +10,10 @@ const mapState = ({ info }) => ({
 
 const MainSection = ({ active }) => (
   <div className="row" style={{marginTop: "24px"}}>
-    <div className="col-2">
+    <div className="col-2 offset-1">
       <Palette />
     </div>
-    <div className="col-10">
+    <div className="col-9">
       {
         active ? <BoardContainer /> : null
       }

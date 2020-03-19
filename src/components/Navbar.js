@@ -5,10 +5,12 @@ import { newGameStarted } from '../actions';
 
 import { createNewMaster, createNewBoard } from '../utils/helpers';
 
-const mapState = ({ settings }) => ({
+const mapState = ({ settings, info }) => ({
   numGuesses: settings.numGuesses,
   codeLength: settings.codeLength,
-  numColors: settings.numColors
+  numColors: settings.numColors,
+  win: info.win,
+  gameOver: info.gameOver
 });
 
 const mapDispatch = dispatch => {
@@ -22,18 +24,29 @@ const mapDispatch = dispatch => {
   }
 }
 
-const Navbar = ({ onNewGameClick, numGuesses, codeLength, numColors }) => (
-  <div>
-    <nav className="navbar sticky-top navbar-dark bg-dark">
-        <span className="navbar-brand mb-0 h1">Mastermind</span>
+const Navbar = ({ onNewGameClick, numGuesses, codeLength, numColors, win, gameOver }) => (
+    <nav className="row navbar navbar-dark bg-dark">
+      <div className="col-2">
+        <span className="row navbar-brand mb-0 h1">Mastermind</span>
+      </div>
+      <div className="col-8">
+        <div className="row d-flex justify-content-center">
+          <h2>
+            {
+              win ? "You Won!" : gameOver ? "You Lost" : ""
+            }
+          </h2>
+        </div>
+      </div>
+      <div className="col-2">
         <button 
           type="button" 
-          className="btn btn-primary"
+          className="row btn btn-primary"
           onClick={() => onNewGameClick(numGuesses, codeLength, numColors)}>
             New Game
         </button>
-      </nav>
-  </div>
+      </div>
+    </nav>
 );
 
 Navbar.propTypes = {

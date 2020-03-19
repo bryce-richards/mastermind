@@ -5,7 +5,7 @@ import MainSection from './MainSection';
 
 const App = () => (
   <div>
-    <header>
+    <header className="col-12">
       <Navbar />
     </header>
     <main className="container-fluid">

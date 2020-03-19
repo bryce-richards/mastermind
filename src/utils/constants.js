@@ -1,12 +1,12 @@
 export const themes = {
   neon: {
     0: "#1A1110", // black
-    1: "#FD5B78", // red
+    1: "#FF355E", // red
     2: "#FF9966", // orange
     3: "#FFFF66", // yellow
     4: "#66FF66", // green
     5: "#50BFE6", // blue
-    6: "#EE34D2" // purple
+    6: "#FF00CC" // purple
   }
 };
 
