@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { themes } from '../utils/constants';
+import { themes, keyColors } from '../utils/constants';
 
 const pegIconSize = {
   key: "xs",
@@ -15,27 +15,38 @@ function mapState(state, ownProps) {
   const { type, color } = ownProps;
   const index = ownProps.index;
   const size = pegIconSize[type];
+  let colorHex = "";
+
+  let onPegClick = () => {};
+  if (ownProps.hasOwnProperty("onPegClick")) {
+    onPegClick = ownProps.onPegClick;
+  }
 
   const { 
     palette: {
       theme
-    } 
+    }
   } = state;
 
-  const themeHex = themes[theme];
+  if (type === "key") {
+    colorHex = keyColors;
+  } else {
+    colorHex = themes[theme];
+  }
 
-  return {
+  return {  
     type,
     size,
     index,
     color,
-    themeHex
+    colorHex,
+    onPegClick
   }
 }
 
 
 const Peg = props => (
-  <div style={{color: props.themeHex[props.color]}}>
+  <div style={{color: props.colorHex[props.color]}}>
     <i 
       className={`fad fa-circle fa-${props.size}`}
       onClick={() => props.onPegClick()} />

@@ -1,15 +1,10 @@
 import React from "react";
 import Peg from './Peg';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 
-const mapState = ({ master }) => ({
-  master
-});
-
-const MasterRow = ({ master }) => (
+const MasterRow = ({ code }) => (
   <div>
-  { master.map((color, i) => 
+  { code.map((color, i) => 
       <Peg 
         key={i} 
         index={i}
@@ -19,12 +14,8 @@ const MasterRow = ({ master }) => (
   </div>
 );
 
-
 MasterRow.propTypes = {
-  master: PropTypes.array.isRequired
+  code: PropTypes.array.isRequired
 };
 
-export default connect(
-  mapState,
-  null
-)(MasterRow);
+export default MasterRow;

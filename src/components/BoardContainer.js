@@ -4,14 +4,14 @@ import BoardRow from './BoardRow';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-const mapState = ({ board }) => ({
-  board
+const mapState = ({ master, board }) => ({
+  master, board
 });
 
-const BoardContainer = ({ board }) => (
+const BoardContainer = ({ master, board }) => (
   <div>
     <div>
-      <MasterRow />
+      <MasterRow code={master} />
     </div>  
     <div>
       { board.map((row, i) => 

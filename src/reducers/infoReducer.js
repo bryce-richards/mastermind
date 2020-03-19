@@ -19,7 +19,7 @@ const info = (state = infoDefaultState, action) => {
     case NEW_TURN:
       return {
         ...state,
-        turn: action.turn + 1
+        turn: action.newTurn
       }
     case GAME_ENDED:
       return {

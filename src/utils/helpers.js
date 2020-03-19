@@ -1,25 +1,51 @@
 export const handleGuess = (master, guess) => {
-  const keyArray = [];
-  let key;
-  
-  for (let i = 0; i < master.length; i++) {
-    key = 0;
+  const masterCount = {};
+  let guessMatches = 0;
+  const guessCount = {};
+  const initialKeys = {};
+  const lowerDenom = {};
+  let finalKeys = [];
 
-    for (let j = 0; j < guess.length; j++) {
-      if (guess[j] === master[i]) {
-        if (j === i) {
-          key = 1;
-          break;
-        } else {
-          key = 2;
+  for (let [masterIndex, masterColor] of master.entries()) {
+    if (!masterCount[masterColor]) {
+      masterCount[masterColor] = 1;
+    } else {
+      masterCount[masterColor]++;
+    }
+    
+    guessMatches = guess.filter(color => color === masterColor).length;
+    
+    if (guessMatches && !guessCount[masterColor]) {
+      guessCount[masterColor] = guessMatches;
+    }
+    
+    for (let [guessIndex, guessColor] of guess.entries()) {
+      if (guessColor === masterColor) {
+        if (!initialKeys[masterColor]) {
+          initialKeys[masterColor] = [];
         }
+
+        if (guessIndex === masterIndex) {
+          initialKeys[masterColor].unshift(1);
+        } else {
+          initialKeys[masterColor].push(2);
+        }
+        
+        initialKeys[masterColor].push(guessIndex === masterIndex ? 1 : 2);
       }
     }
-
-    keyArray.push(key);
   }
 
-    return randomizeKey(keyArray);
+  for (let color in initialKeys) {
+    lowerDenom[color] = guessCount[color] <= masterCount[color] ? guessCount[color] : masterCount[color];
+    finalKeys = [...finalKeys, ...initialKeys[color].slice(0, 0 + lowerDenom[color])];
+  }
+
+  while (finalKeys.length < master.length) {
+    finalKeys.push(0);
+  }
+
+  return randomizeKey(finalKeys);
 };
 
 const randomizeKey = key => {
@@ -27,8 +53,8 @@ const randomizeKey = key => {
   let randomIndex;
 
   while (key.length > 0) {
-    randomIndex = Math.floor(Math.random * key.length);
-    randomizedArray.push(key.splice(randomIndex, 1));
+    randomIndex = Math.floor(Math.random() * key.length);
+    randomizedArray.push(key.splice(randomIndex, 1)[0]);
   }
 
   return randomizedArray;

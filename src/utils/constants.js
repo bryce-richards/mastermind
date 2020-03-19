@@ -12,8 +12,8 @@ export const themes = {
 
 export const keyColors = {
   0: "#1A1110", // black
-  1: "#FF3855", // color & position
-  2: "#FEFEFE" // color only
+  1: "#DA2647", // color & position
+  2: "#FEFEFA" // color only
 };
 
 export const defaultSettings = {

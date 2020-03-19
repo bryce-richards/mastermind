@@ -7,9 +7,9 @@ const BoardRowSubmit = props => (
     <button 
       type="button" 
       className={`btn btn-success ${props.visible ? "visible" : "invisible"}`}
-      onClick={() => props.onCodeSubmit}
       visible={props.visible.toString()} 
-      disabled={!props.enabled}>
+      disabled={!props.enabled}
+      onClick={() => props.onCodeSubmit()}>
       Submit  
     </button>
   </div>

@@ -21,7 +21,7 @@ export const newGameStarted = (master, board) => {
 
 export const codeSubmitted = (boardIndex, boardKey, turn) => (dispatch, getState) => {
   const { settings } = getState();
-
+  
   dispatch({
     type: CODE_SUBMITTED,
     index: boardIndex,

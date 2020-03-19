@@ -37,9 +37,9 @@ function mapState(state, ownProps) {
 
 const mapDispatch = dispatch => {
   return {
-    handleCodeSubmit: ({ master, boardIndex, boardRow, turn }) => {
-      const boardKey = handleGuess(master, boardRow);
-
+    handleCodeSubmit: ({ master, boardIndex, boardCode, turn }) => {
+      const boardKey = handleGuess(master, boardCode);
+      
       dispatch(codeSubmitted(boardIndex, boardKey, turn));
     }
   }
@@ -47,14 +47,14 @@ const mapDispatch = dispatch => {
 
 const BoardRow = props => (
   <div>
-    {/* <div>
-      <BoardRowKey index={ props.boardIndex } key={ props.boardKey }/>
-    </div> */}
+    <div>
+      <BoardRowKey index={props.boardIndex} code={props.boardKey}/>
+    </div>
     <div>
       <BoardRowCode index={props.boardIndex} code={props.boardCode}/>
     </div>
     <div>
-      <BoardRowSubmit onCodeSubmit={() => props.handleCodeSubmit({...props}) } visible={props.active} enabled={props.enabled}/>
+      <BoardRowSubmit onCodeSubmit={() => props.handleCodeSubmit(props)} visible={props.active} enabled={props.enabled}/>
     </div>
   </div>
 );
