@@ -7,18 +7,33 @@ import { connect } from 'react-redux';
 const mapState = ({ master, board, info }) => ({
   master, 
   board, 
+  turn: info.turn,
   hidden: !info.gameOver
 });
 
-const BoardContainer = ({ master, board, hidden }) => (
+const buildRows = (board, turn) => {
+  const rows = [];
+
+  for (let i = board.length - 1; i >= 0; i--) {
+    if (i < turn) {
+      rows.push(
+        <BoardRow key={i} index={i} boardRow={board[i]} />
+      );
+    }
+  }
+
+  return rows;
+}
+
+const BoardContainer = ({ master, board, hidden, turn }) => (
   <div className="row">
     <div className="col-6 offset-2">
       <MasterRow code={master} hidden={hidden}/>
     </div>  
     <div className="col-6 offset-2">
-      { board.map((row, i) => 
-        <BoardRow key={i} index={i} boardRow={row} />
-      )}
+      { 
+        buildRows(board, turn)
+      }
     </div>
   </div>
 );

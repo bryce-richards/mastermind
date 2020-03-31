@@ -9,7 +9,7 @@ import { handleGuess } from '../utils/helpers';
 
 function mapState(state, ownProps) {
   const boardIndex = ownProps.index;
-  const { boardRow } = ownProps
+  const { boardRow } = ownProps;
   const { info, master } = state;
   const boardCode = boardRow.code; 
   const boardKey = boardRow.key;
